@@ -29,18 +29,22 @@ sitemaps = {
     'Tag': TagSiteMap,
     'User': UserSiteMap,
     'static': StaticViewSitemap
+
 }
 
 urlpatterns = [
-                  url(r'^admin/', admin.site.urls),
-                  url(r'', include('blog.urls', namespace='blog', app_name='blog')),
 
-                  url(r'', include('comments.urls', namespace='comment', app_name='comments')),
-                  url(r'', include('accounts.urls', namespace='account', app_name='accounts')),
-                  url(r'', include('oauth.urls', namespace='oauth', app_name='oauth')),
-                  url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
-                      name='django.contrib.sitemaps.views.sitemap'),
-                  url(r'^feed/$', DjangoBlogFeed()),
-                  url(r'^search', include('haystack.urls'), name='search'),
-                  url(r'', include('servermanager.urls', namespace='servermanager', app_name='servermanagers'))
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'^admin/', admin.site.urls),
+
+    url(r'', include('blog.urls', namespace='blog', app_name='blog')),
+    url(r'', include('comments.urls', namespace='comment', app_name='comments')),
+    url(r'', include('accounts.urls', namespace='account', app_name='accounts')),
+    url(r'', include('oauth.urls', namespace='oauth', app_name='oauth')),
+
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^feed/$', DjangoBlogFeed()),
+    url(r'^search', include('haystack.urls'), name='search'),
+
+    url(r'', include('servermanager.urls', namespace='servermanager', app_name='servermanagers'))
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
